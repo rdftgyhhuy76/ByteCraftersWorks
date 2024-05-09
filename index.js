@@ -1,14 +1,17 @@
-function connect(root) {
-  if (!root) return root;
-  let levelStart = root;
-  while (levelStart) {
-    let curr = levelStart;
-    while (curr) {
-      if (curr.left) curr.left.next = curr.right;
-      if (curr.right && curr.next) curr.right.next = curr.next.left;
-      curr = curr.next;
+function countAndSay(n) {
+  let result = "1";
+  for (let i = 1; i < n; i++) {
+    let temp = "";
+    let count = 1;
+    for (let j = 0; j < result.length; j++) {
+      if (result[j] === result[j + 1]) {
+        count++;
+      } else {
+        temp += count + result[j];
+        count = 1;
+      }
     }
-    levelStart = levelStart.left;
+    result = temp;
   }
-  return root;
+  return result;
 }
