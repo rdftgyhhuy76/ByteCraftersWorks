@@ -1,13 +1,19 @@
-const stoogeSort = (arr, i = 0, j = arr.length - 1) => {
-  if (arr[i] > arr[j]) {
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+function combinationSum2(candidates, target) {
+  candidates.sort((a, b) => a - b);
+  const result = [];
+  backtrack([], 0, 0);
+  return result;
+  function backtrack(combination, start, sum) {
+    if (sum === target) {
+      result.push([...combination]);
+      return;
+    }
+    if (sum > target) return;
+    for (let i = start; i < candidates.length; i++) {
+      if (i > start && candidates[i] === candidates[i - 1]) continue;
+      combination.push(candidates[i]);
+      backtrack(combination, i + 1, sum + candidates[i]);
+      combination.pop();
+    }
   }
-  if (i + 1 >= j) {
-    return arr;
-  }
-  const t = Math.floor((j - i + 1) / 3);
-  stoogeSort(arr, i, j - t);
-  stoogeSort(arr, i + t, j);
-  stoogeSort(arr, i, j - t);
-  return arr;
-};
+}
